@@ -40,6 +40,7 @@ class Flag(BaseObject):
         self.extra_info = extra_info
         self.verify = verify
         self.setup = setup
+        self.setup_fields = None
         self._completed = False
         self._completed_ts = None
         self._started_ts = None
@@ -52,11 +53,11 @@ class Flag(BaseObject):
             return self.retrieve(ram['flags'], self.unique)
         return existing
 
-    def activate(self):
+    def activate(self, services):
         if not self._started_ts:
             self._started_ts = datetime.now()
             if self.setup:
-                self.setup()
+                self.setup_fields = self.setup(services)
         if not self._completed_ts:
             self._ticks += 1
 
