@@ -27,8 +27,8 @@ class TrainingApi(BaseService):
         for flag in [flag for b in badges for flag in b.flags]:
             try:
                 if not flag.completed:
-                    flag.activate(self.services)
-                    flag.completed = await flag.verify(self.services, self.setup_fields) if self.setup_fields else \
+                    await flag.activate(self.services)
+                    flag.completed = await flag.verify(self.services, flag.setup_fields) if flag.setup_fields else \
                         await flag.verify(self.services)
                     break
             except Exception as e:

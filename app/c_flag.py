@@ -53,11 +53,11 @@ class Flag(BaseObject):
             return self.retrieve(ram['flags'], self.unique)
         return existing
 
-    def activate(self, services):
+    async def activate(self, services):
         if not self._started_ts:
             self._started_ts = datetime.now()
             if self.setup:
-                self.setup_fields = self.setup(services)
+                self.setup_fields = await self.setup(services)
         if not self._completed_ts:
             self._ticks += 1
 

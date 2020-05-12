@@ -34,5 +34,5 @@ async def create_operation(services, adversary):
 
 
 async def verify(services, operation):
-    return operation.finish and len(operation.links) == 1 and \
+    return operation.finish and len(operation.chain) == 1 and \
            'host.user.name' in [f.trait for f in operation.all_facts()]
