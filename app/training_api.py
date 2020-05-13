@@ -28,8 +28,7 @@ class TrainingApi(BaseService):
             try:
                 if not flag.completed:
                     await flag.activate(self.services)
-                    flag.completed = await flag.verify(self.services, flag.setup_fields) if flag.setup_fields else \
-                        await flag.verify(self.services)
+                    flag.completed = await flag.verify(self.services)
                     break
             except Exception as e:
                 logging.error(e)

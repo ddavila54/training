@@ -57,7 +57,7 @@ class Flag(BaseObject):
         if not self._started_ts:
             self._started_ts = datetime.now()
             if self.setup:
-                self.setup_fields = await self.setup(services)
+                await self.setup(services)
         if not self._completed_ts:
             self._ticks += 1
 
