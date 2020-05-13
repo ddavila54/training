@@ -32,13 +32,14 @@ class Flag(BaseObject):
                     extra_info=self.extra_info, code=self.calculate_code(),
                     completed_ts=self.completed_ts.strftime('%Y-%m-%d %H:%M:%S') if self.completed_ts else '')
 
-    def __init__(self, number, name, challenge, extra_info, verify, setup):
+    def __init__(self, number, name, challenge, extra_info, verify, setup, prerequisites_met):
         super().__init__()
         self.number = number
         self.name = name
         self.challenge = challenge
         self.extra_info = extra_info
         self.verify = verify
+        self.prerequisites_met = prerequisites_met
         self.setup = setup
         self.setup_fields = None
         self._completed = False
@@ -55,7 +56,10 @@ class Flag(BaseObject):
 
     async def activate(self, services):
         if not self._started_ts:
-            self._started_ts = datetime.now()
+            if not self.prerequisites_met or (self.prerequisites_met and self.prerequisites_met()):
+                self._started_ts = datetime.now()
+            else:
+                return
             if self.setup:
                 self.setup_fields = await self.setup(services)
         if not self._completed_ts:
