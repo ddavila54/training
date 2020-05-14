@@ -21,5 +21,7 @@ async def setup(services):
 
 async def verify(services, operation_id):
     operation = (await services.get('data_svc').locate('operations', match=dict(id=operation_id)))[0]
-    return len(operation.chain) == 1 and \
-        'host.user.name' in [f.trait for f in operation.all_facts()]
+    if len(operation.chain) == 1 and 'host.user.name' in [f.trait for f in operation.all_facts()]:
+        await services.get('rest_svc').delete_operation(data=dict(id=operation_id))
+        return True
+    return False
