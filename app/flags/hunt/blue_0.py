@@ -8,10 +8,14 @@ challenge = ''
 extra_info = """"""
 
 
+async def prerequisites_met(services):
+    return len(await services.get('data_svc').locate('agents', match=dict(group='cert-nix')))
+
+
 async def setup(services):
     access = dict(access=[BaseWorld.Access.RED])
-    data = dict(name='Hunt0', group='cert-nix', adversary_id='6e19d5f9-e4d9-42b2-bc89-ea4298541d80', atomic_enabled=1,
-                auto_close=1, hidden=True)
+    data = dict(name='Hunt0', group='cert-nix', adversary_id='6e19d5f9-e4d9-42b2-bc89-ea4298541d80',
+                planner='sequential', atomic_enabled=1, auto_close=1, hidden=True)
     return (await services.get('rest_svc').create_operation(access=access, data=data))[0]['id']
 
 

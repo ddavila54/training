@@ -56,14 +56,14 @@ class Flag(BaseObject):
 
     async def activate(self, services):
         if not self._started_ts:
-            if not self.prerequisites_met or (self.prerequisites_met and self.prerequisites_met()):
-                self._started_ts = datetime.now()
-            else:
-                return
+            if self.prerequisites_met is not None and not await self.prerequisites_met(services):
+                return False
+            self._started_ts = datetime.now()
             if self.setup:
                 self.setup_fields = await self.setup(services)
         if not self._completed_ts:
             self._ticks += 1
+        return True
 
     def calculate_code(self):
         return self.unique
