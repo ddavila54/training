@@ -11,8 +11,8 @@
     linux:
       sh:
         command: |
-          nc -nlv localhost 7011 &;
+          nc -nlv 7011 &
     darwin:
       sh:
         command: |
-          nc -nlv localhost 7011 &;
+          nc -nlv 7011 &
