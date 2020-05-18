@@ -11,7 +11,7 @@ extra_info = """"""
 
 operation_name = 'training_manual_2'
 adversary_id = '890508db-9646-4a2d-8d1a-4ea25b3ce02a'
-agent_group = 'cert-nix'
+agent_group = 'cert-win'
 
 
 async def verify(services):
