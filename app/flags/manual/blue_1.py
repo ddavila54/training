@@ -8,7 +8,7 @@ challenge = 'Start a listening process on Port 7011 on the Linux or Darwin machi
 extra_info = """"""
 
 operation_name = 'training_manual_1'
-adversary_id = '6e19d5f9-e4d9-42b2-bc89-ea4298541d80'
+adversary_id = '72c0b333-f6fe-4fa0-a342-4215e8de3947'
 agent_group = 'cert-nix'
 
 
