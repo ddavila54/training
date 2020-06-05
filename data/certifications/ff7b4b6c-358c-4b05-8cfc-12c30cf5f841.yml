@@ -4,6 +4,6 @@ access: blue
 badges:
   manual:
     flags:
-      - flags.manual.blue_8b
-      - flags.manual.blue_9b
-      - flags.manual.blue_10b
+      - flags.manual.blue_8a
+      - flags.manual.blue_9a
+      - flags.manual.blue_10a

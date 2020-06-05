@@ -1,0 +1,13 @@
+---
+- id: test
+  name: test ability
+  description: test ability
+  tactic: test
+  technique:
+    attack_id: t
+    name: t
+  platforms:
+    darwin:
+      sh:
+        command: |
+          echo hello
