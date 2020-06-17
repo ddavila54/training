@@ -3,8 +3,9 @@ from app.utility.base_world import BaseWorld
 
 
 name = 'Find Changes to Bash Profile'
-challenge = 'Within a minute of this flag activating, a Bash Profile will have been modified on the *nix machine. ' \
-            'Run the appropriate detection ability in the \'Blue Manual\' operation to find the modified profile.'
+challenge = 'Within a minute of this flag activating, the .bashrc file of the user used to deploy the red agent on ' \
+            'the *nix machine will have been modified. Run the appropriate detection ability in the \'Blue Manual\' ' \
+            'operation to find the modified profile.'
 extra_info = """"""
 
 
@@ -14,13 +15,8 @@ agent_group = 'cert-nix'
 
 
 async def verify(services):
-    if await BaseFlag.does_agent_exist(services, agent_group):
-        if not (await BaseFlag.is_operation_started(services, operation_name)):
-            await BaseFlag.start_operation(services, operation_name, agent_group, adversary_id)
-        if await BaseFlag.is_operation_successful(services, operation_name) and await is_flag_satisfied(services):
-            await BaseFlag.cleanup_operation(services, operation_name)
-            return True
-    return False
+    return await BaseFlag.standard_verify_with_operation(services, operation_name, adversary_id, agent_group,
+                                                         is_flag_satisfied)
 
 
 async def is_flag_satisfied(services):
